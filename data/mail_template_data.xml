@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Template Email per Scadenza Contratti con CC multipli -->
+        <record id="mail_template_contract_expiry" model="mail.template">
+            <field name="name">Fleet: Notifica Scadenza Contratto</field>
+            <field name="model_id" ref="fleet.model_fleet_vehicle_log_contract"/>
+            <field name="subject">Scadenza Contratto: ${object.vehicle_id.display_name} - ${object.cost_subtype_id.name or 'Contratto'}</field>
+            <field name="email_from">${(object.company_id.email or user.email_formatted) | safe}</field>
+            <field name="email_to">${object.user_id.email or ''}</field>
+            <field name="email_cc">${ctx.get('email_cc', ','.join(object.notify_partner_ids.filtered(lambda p: p.email).mapped('email')))}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Gentile ${object.user_id.name or 'Utente'},
+                        <br/><br/>
+                        Il contratto <strong>${object.cost_subtype_id.name or 'Contratto'}</strong> 
+                        per il veicolo <strong>${object.vehicle_id.display_name}</strong> 
+                        sta per scadere.
+                        <br/><br/>
+                        <strong>Dettagli:</strong><br/>
+                        • Veicolo: ${object.vehicle_id.display_name}<br/>
+                        • Tipo contratto: ${object.cost_subtype_id.name}<br/>
+                        • Data scadenza: ${format_date(object.expiration_date)}<br/>
+                        % if object.start_date:
+                        • Data inizio: ${format_date(object.start_date)}<br/>
+                        % endif
+                        % if object.cost_generated:
+                        • Costo: ${object.cost_generated} ${object.currency_id.symbol}<br/>
+                        % endif
+                        % if object.insurer_id:
+                        • Fornitore: ${object.insurer_id.name}<br/>
+                        % endif
+                        <br/>
+                        % if object.notes:
+                        <strong>Note:</strong><br/>
+                        ${object.notes | safe}
+                        <br/><br/>
+                        % endif
+                        % if object.team_id:
+                        <em>Team assegnato: ${object.team_id.name}</em><br/>
+                        % endif
+                        <br/>
+                        <div style="margin: 16px 0px 16px 0px;">
+                            <a href="/web#id=${object.id}&amp;view_type=form&amp;model=fleet.vehicle.log.contract" 
+                               style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px;">
+                                Visualizza Contratto
+                            </a>
+                        </div>
+                        <br/>
+                        Cordiali saluti,<br/>
+                        ${object.company_id.name}
+                    </p>
+                </div>
+            </field>
+            <field name="lang">${object.user_id.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <!-- Template Email per Notifica Immediata (es. nuovo contratto) -->
+        <record id="mail_template_contract_notification" model="mail.template">
+            <field name="name">Fleet: Notifica Nuovo Contratto Team</field>
+            <field name="model_id" ref="fleet.model_fleet_vehicle_log_contract"/>
+            <field name="subject">Nuovo Contratto Assegnato: ${object.vehicle_id.display_name}</field>
+            <field name="email_from">${(object.company_id.email or user.email_formatted) | safe}</field>
+            <field name="email_to">${','.join(object.notify_user_ids.mapped('email'))}</field>
+            <field name="email_cc">${','.join(object.notify_partner_ids.filtered(lambda p: p.email).mapped('email'))}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Ciao,
+                        <br/><br/>
+                        È stato creato un nuovo contratto per il veicolo <strong>${object.vehicle_id.display_name}</strong>
+                        e il tuo team <strong>${object.team_id.name}</strong> è stato assegnato per le notifiche.
+                        <br/><br/>
+                        <strong>Dettagli:</strong><br/>
+                        • Veicolo: ${object.vehicle_id.display_name}<br/>
+                        • Tipo contratto: ${object.cost_subtype_id.name}<br/>
+                        % if object.start_date:
+                        • Data inizio: ${format_date(object.start_date)}<br/>
+                        % endif
+                        % if object.expiration_date:
+                        • Data scadenza: ${format_date(object.expiration_date)}<br/>
+                        % endif
+                        % if object.cost_generated:
+                        • Costo: ${object.cost_generated} ${object.currency_id.symbol}<br/>
+                        % endif
+                        <br/>
+                        <div style="margin: 16px 0px 16px 0px;">
+                            <a href="/web#id=${object.id}&amp;view_type=form&amp;model=fleet.vehicle.log.contract" 
+                               style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px;">
+                                Visualizza Contratto
+                            </a>
+                        </div>
+                        <br/>
+                        ${object.company_id.name}
+                    </p>
+                </div>
+            </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

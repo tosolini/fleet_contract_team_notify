@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View Inherit - Add Team Notifications section -->
+    <record id="fleet_vehicle_log_contract_view_form_inherit" model="ir.ui.view">
+        <field name="name">fleet.vehicle.log.contract.form.inherit</field>
+        <field name="model">fleet.vehicle.log.contract</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_log_contract_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Add section at the end of sheet before chatter -->
+            <xpath expr="//sheet" position="inside">
+                <separator string="Team Notifications" class="oe_edit_only"/>
+                <group name="notify_team" col="2">
+                    <field name="team_id" options="{'no_create': True}"/>
+                    <field name="notify_user_ids" widget="many2many_tags" 
+                           options="{'color_field': 'color', 'no_create': True}"
+                           placeholder="Internal users to notify..."/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Search View Inherit - Add team filters -->
+    <record id="fleet_vehicle_log_contract_view_search_inherit" model="ir.ui.view">
+        <field name="name">fleet.vehicle.log.contract.search.inherit</field>
+        <field name="model">fleet.vehicle.log.contract</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_log_contract_view_search"/>
+        <field name="arch" type="xml">
+            <!-- Add search fields -->
+            <xpath expr="//field[@name='vehicle_id']" position="after">
+                <field name="team_id"/>
+                <field name="notify_user_ids"/>
+            </xpath>
+            
+            <!-- Add filters -->
+            <xpath expr="//search" position="inside">
+                <filter name="with_team" string="With Team" 
+                        domain="[('team_id', '!=', False)]"/>
+                <filter name="without_team" string="Without Team" 
+                        domain="[('team_id', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_team" string="Team" 
+                            context="{'group_by': 'team_id'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

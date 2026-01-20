@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- 
+            ESEMPIO DI SCHEDULER CRON per notifiche automatiche scadenze
+            
+            Per abilitare, decommentare e aggiungere al __manifest__.py:
+            'data': [
+                ...
+                'data/cron_data.xml',
+            ]
+        -->
+        
+        <!-- Cron per notifiche scadenze contratti (giornaliero) -->
+        <!-- 
+        <record id="ir_cron_fleet_contract_expiry_notify" model="ir.cron">
+            <field name="name">Fleet: Notifica Scadenze Contratti Team</field>
+            <field name="model_id" ref="fleet.model_fleet_vehicle_log_contract"/>
+            <field name="state">code</field>
+            <field name="code">
+# Trova contratti in scadenza nei prossimi 30 giorni
+from datetime import timedelta
+today = fields.Date.today()
+contracts = model.search([
+    ('expiration_date', '&lt;=', today + timedelta(days=30)),
+    ('expiration_date', '&gt;=', today),
+    ('state', '!=', 'closed'),
+    '|',
+    ('team_id', '!=', False),
+    ('user_id', '!=', False),
+])
+
+# Crea attività e invia email
+for contract in contracts:
+    # Crea attività per i membri del team
+    contract._create_expiry_activities()
+    
+    # Invia email con CC ai partner del team
+    contract._send_expiry_notification_email()
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="True"/>
+            <field name="doall" eval="False"/>
+            <field name="user_id" ref="base.user_admin"/>
+        </record>
+        -->
+        
+        <!-- Cron per reminder a 7 giorni dalla scadenza (opzionale) -->
+        <!--
+        <record id="ir_cron_fleet_contract_urgent_reminder" model="ir.cron">
+            <field name="name">Fleet: Reminder Urgente Scadenze (7 giorni)</field>
+            <field name="model_id" ref="fleet.model_fleet_vehicle_log_contract"/>
+            <field name="state">code</field>
+            <field name="code">
+# Trova contratti in scadenza nei prossimi 7 giorni
+from datetime import timedelta
+today = fields.Date.today()
+urgent_contracts = model.search([
+    ('expiration_date', '&lt;=', today + timedelta(days=7)),
+    ('expiration_date', '&gt;=', today),
+    ('state', '!=', 'closed'),
+    '|',
+    ('team_id', '!=', False),
+    ('user_id', '!=', False),
+])
+
+# Invia reminder urgente
+for contract in urgent_contracts:
+    # Usa template alternativo per urgenza
+    template = env.ref('fleet_contract_team_notify.mail_template_contract_expiry')
+    if template and contract.notify_partner_ids:
+        email_cc = ','.join(contract.notify_partner_ids.filtered('email').mapped('email'))
+        template.with_context(
+            email_cc=email_cc,
+            is_urgent=True
+        ).send_mail(contract.id, force_send=True)
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="False"/>
+            <field name="doall" eval="False"/>
+            <field name="user_id" ref="base.user_admin"/>
+        </record>
+        -->
+    </data>
+</odoo>

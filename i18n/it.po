@@ -1,0 +1,262 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* fleet_contract_team_notify
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-20 12:00:00+0000\n"
+"PO-Revision-Date: 2026-01-20 12:00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: fleet_contract_team_notify
+#: model:ir.model,name:fleet_contract_team_notify.model_fleet_contract_team
+msgid "Fleet Contract Notification Team"
+msgstr "Team Notifiche Contratti Flotta"
+
+#. module: fleet_contract_team_notify
+#: model:ir.model,name:fleet_contract_team_notify.model_fleet_vehicle_log_contract
+msgid "Contract"
+msgstr "Contratto"
+
+#. module: fleet_contract_team_notify
+#: model:ir.model.fields,field_description:fleet_contract_team_notify.field_fleet_contract_team__name
+msgid "Team Name"
+msgstr "Nome Team"
+
+#. module: fleet_contract_team_notify
+#: model:ir.model.fields,field_description:fleet_contract_team_notify.field_fleet_contract_team__description
+msgid "Description"
+msgstr "Descrizione"
+
+#. module: fleet_contract_team_notify
+#: model:ir.model.fields,field_description:fleet_contract_team_notify.field_fleet_contract_team__user_ids
+#: model:ir.model.fields,field_description:fleet_contract_team_notify.field_fleet_vehicle_log_contract__notify_user_ids
+msgid "Users to Notify"
+msgstr "Utenti da Notificare"
+
+#. module: fleet_contract_team_notify
+#: model:ir.model.fields,help:fleet_contract_team_notify.field_fleet_contract_team__user_ids
+msgid "Internal users who will receive notifications for contracts assigned to this team"
+msgstr "Utenti interni che riceveranno le notifiche per i contratti assegnati a questo team"
+
+#. module: fleet_contract_team_notify
+#: model:ir.model.fields,field_description:fleet_contract_team_notify.field_fleet_contract_team__active
+msgid "Active"
+msgstr "Attivo"
+
+#. module: fleet_contract_team_notify
+#: model:ir.model.fields,field_description:fleet_contract_team_notify.field_fleet_contract_team__contract_count
+msgid "Contract Count"
+msgstr "Numero Contratti"
+
+#. module: fleet_contract_team_notify
+#: model:ir.model.fields,field_description:fleet_contract_team_notify.field_fleet_vehicle_log_contract__team_id
+msgid "Notification Team"
+msgstr "Team Notifiche"
+
+#. module: fleet_contract_team_notify
+#: model:ir.model.fields,help:fleet_contract_team_notify.field_fleet_vehicle_log_contract__team_id
+msgid "Team of people who will receive notifications for this contract"
+msgstr "Team di persone che riceveranno le notifiche per questo contratto"
+
+#. module: fleet_contract_team_notify
+#: model:ir.model.fields,help:fleet_contract_team_notify.field_fleet_vehicle_log_contract__notify_user_ids
+msgid "Internal users who will receive activities and notifications for this contract"
+msgstr "Utenti interni che riceveranno attività e notifiche per questo contratto"
+
+#. module: fleet_contract_team_notify
+#: model:ir.ui.view,arch_db:fleet_contract_team_notify.fleet_contract_team_view_list
+msgid "Contracts"
+msgstr "Contratti"
+
+#. module: fleet_contract_team_notify
+#: model:ir.ui.view,arch_db:fleet_contract_team_notify.fleet_contract_team_view_form
+msgid "Archived"
+msgstr "Archiviato"
+
+#. module: fleet_contract_team_notify
+#: model:ir.ui.view,arch_db:fleet_contract_team_notify.fleet_contract_team_view_form
+msgid "e.g. Maintenance Team"
+msgstr "es. Team Manutenzione"
+
+#. module: fleet_contract_team_notify
+#: model:ir.ui.view,arch_db:fleet_contract_team_notify.fleet_contract_team_view_form
+msgid "Select users who will receive notifications..."
+msgstr "Seleziona gli utenti che riceveranno le notifiche..."
+
+#. module: fleet_contract_team_notify
+#: model:ir.ui.view,arch_db:fleet_contract_team_notify.fleet_contract_team_view_search
+msgid "Active"
+msgstr "Attivi"
+
+#. module: fleet_contract_team_notify
+#: model:ir.ui.view,arch_db:fleet_contract_team_notify.fleet_contract_team_view_search
+msgid "Archived"
+msgstr "Archiviati"
+
+#. module: fleet_contract_team_notify
+#: model:ir.ui.view,arch_db:fleet_contract_team_notify.fleet_contract_team_view_search
+msgid "Group By"
+msgstr "Raggruppa per"
+
+#. module: fleet_contract_team_notify
+#: model:ir.ui.view,arch_db:fleet_contract_team_notify.fleet_contract_team_view_search
+msgid "Status"
+msgstr "Stato"
+
+#. module: fleet_contract_team_notify
+#: model:ir.actions.act_window,name:fleet_contract_team_notify.fleet_contract_team_action
+#: model:ir.ui.menu,name:fleet_contract_team_notify.fleet_contract_team_menu
+msgid "Contract Teams"
+msgstr "Team Contratti"
+
+#. module: fleet_contract_team_notify
+#: model:ir.actions.act_window,help:fleet_contract_team_notify.fleet_contract_team_action
+msgid "Create your first Notification Team"
+msgstr "Crea il primo Team per le notifiche"
+
+#. module: fleet_contract_team_notify
+#: model:ir.actions.act_window,help:fleet_contract_team_notify.fleet_contract_team_action
+msgid ""
+"Teams allow you to notify multiple people simultaneously\n"
+"when there are deadlines or important events on fleet contracts."
+msgstr ""
+"I team consentono di notificare più persone contemporaneamente\n"
+"quando ci sono scadenze o eventi importanti sui contratti della flotta."
+
+#. module: fleet_contract_team_notify
+#: model:ir.ui.view,arch_db:fleet_contract_team_notify.fleet_vehicle_log_contract_view_form_inherit
+msgid "Team Notifications"
+msgstr "Notifiche Team"
+
+#. module: fleet_contract_team_notify
+#: model:ir.ui.view,arch_db:fleet_contract_team_notify.fleet_vehicle_log_contract_view_form_inherit
+msgid "Internal users to notify..."
+msgstr "Utenti interni da notificare..."
+
+#. module: fleet_contract_team_notify
+#: model:ir.ui.view,arch_db:fleet_contract_team_notify.fleet_vehicle_log_contract_view_search_inherit
+msgid "With Team"
+msgstr "Con Team"
+
+#. module: fleet_contract_team_notify
+#: model:ir.ui.view,arch_db:fleet_contract_team_notify.fleet_vehicle_log_contract_view_search_inherit
+msgid "Without Team"
+msgstr "Senza Team"
+
+#. module: fleet_contract_team_notify
+#: model:ir.ui.view,arch_db:fleet_contract_team_notify.fleet_vehicle_log_contract_view_search_inherit
+msgid "Team"
+msgstr "Team"
+
+#. module: fleet_contract_team_notify
+#: code:addons/fleet_contract_team_notify/models/fleet_contract_team.py:0
+#, python-format
+msgid "Calculate the number of contracts assigned to this team"
+msgstr "Calcola il numero di contratti assegnati a questo team"
+
+#. module: fleet_contract_team_notify
+#: code:addons/fleet_contract_team_notify/models/fleet_contract_team.py:0
+#, python-format
+msgid "Open the contracts view filtered by this team"
+msgstr "Apri la vista dei contratti filtrati per questo team"
+
+#. module: fleet_contract_team_notify
+#: code:addons/fleet_contract_team_notify/models/fleet_vehicle_log_contract.py:0
+#, python-format
+msgid "Automatically populate users from the selected team"
+msgstr "Popola automaticamente gli utenti dal team selezionato"
+
+#. module: fleet_contract_team_notify
+#: code:addons/fleet_contract_team_notify/models/fleet_vehicle_log_contract.py:0
+#, python-format
+msgid "Onchange to update recipients when a team is selected"
+msgstr "Aggiorna i destinatari quando viene selezionato un team"
+
+#. module: fleet_contract_team_notify
+#: code:addons/fleet_contract_team_notify/models/fleet_vehicle_log_contract.py:0
+#, python-format
+msgid "Override create to automatically add followers"
+msgstr "Aggiungi automaticamente i follower alla creazione"
+
+#. module: fleet_contract_team_notify
+#: code:addons/fleet_contract_team_notify/models/fleet_vehicle_log_contract.py:0
+#, python-format
+msgid "Override write to update followers if team changes"
+msgstr "Aggiorna i follower se il team cambia"
+
+#. module: fleet_contract_team_notify
+#: code:addons/fleet_contract_team_notify/models/fleet_vehicle_log_contract.py:0
+#, python-format
+msgid "Add team members as contract followers"
+msgstr "Aggiungi i membri del team come follower del contratto"
+
+#. module: fleet_contract_team_notify
+#: code:addons/fleet_contract_team_notify/models/fleet_vehicle_log_contract.py:0
+#, python-format
+msgid ""
+"Return the list of users who should receive activities for expiries.\n"
+"Includes user_id (original field) + all team members."
+msgstr ""
+"Restituisce la lista di utenti che devono ricevere attività per le scadenze.\n"
+"Include user_id (campo originale) + tutti i membri del team."
+
+#. module: fleet_contract_team_notify
+#: code:addons/fleet_contract_team_notify/models/fleet_vehicle_log_contract.py:0
+#, python-format
+msgid ""
+"Create expiry activities for all configured recipients.\n"
+"Method to be called from cron or scheduler."
+msgstr ""
+"Crea attività di scadenza per tutti i destinatari configurati.\n"
+"Metodo da chiamare da cron o scheduler."
+
+#. module: fleet_contract_team_notify
+#: code:addons/fleet_contract_team_notify/models/fleet_vehicle_log_contract.py:0
+#, python-format
+msgid "Contract expiry %s"
+msgstr "Scadenza contratto %s"
+
+#. module: fleet_contract_team_notify
+#: code:addons/fleet_contract_team_notify/models/fleet_vehicle_log_contract.py:0
+#, python-format
+msgid "The contract for vehicle %s expires on %s"
+msgstr "Il contratto del veicolo %s scade il %s"
+
+#. module: fleet_contract_team_notify
+#: code:addons/fleet_contract_team_notify/models/fleet_vehicle_log_contract.py:0
+#, python-format
+msgid ""
+"Send notification email with multiple CCs to team members.\n"
+"Uses the configured template with automatic CCs."
+msgstr ""
+"Invia email di notifica con CC multipli ai membri del team.\n"
+"Usa il template configurato con CC automatici."
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,name:fleet_contract_team_notify.mail_template_contract_expiry
+msgid "Fleet Contract Team Notify - Contract Expiry"
+msgstr "Notifica Team Contratti Flotta - Scadenza Contratto"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,subject:fleet_contract_team_notify.mail_template_contract_expiry
+msgid "Contract Expiry Notification: ${object.vehicle_id.name}"
+msgstr "Notifica Scadenza Contratto: ${object.vehicle_id.name}"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,name:fleet_contract_team_notify.mail_template_contract_new
+msgid "Fleet Contract Team Notify - New Contract"
+msgstr "Notifica Team Contratti Flotta - Nuovo Contratto"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,subject:fleet_contract_team_notify.mail_template_contract_new
+msgid "New Contract Created: ${object.vehicle_id.name}"
+msgstr "Nuovo Contratto Creato: ${object.vehicle_id.name}"
