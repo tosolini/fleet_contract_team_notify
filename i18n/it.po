@@ -242,21 +242,86 @@ msgstr ""
 "Usa il template configurato con CC automatici."
 
 #. module: fleet_contract_team_notify
-#: model:mail.template,name:fleet_contract_team_notify.mail_template_contract_expiry
-msgid "Fleet Contract Team Notify - Contract Expiry"
-msgstr "Notifica Team Contratti Flotta - Scadenza Contratto"
-
-#. module: fleet_contract_team_notify
 #: model:mail.template,subject:fleet_contract_team_notify.mail_template_contract_expiry
-msgid "Contract Expiry Notification: ${object.vehicle_id.name}"
-msgstr "Notifica Scadenza Contratto: ${object.vehicle_id.name}"
+msgid "Contract Expiry: ${object.vehicle_id.display_name} - ${object.cost_subtype_id.name or 'Contract'}"
+msgstr "Scadenza Contratto: ${object.vehicle_id.display_name} - ${object.cost_subtype_id.name or 'Contratto'}"
 
 #. module: fleet_contract_team_notify
-#: model:mail.template,name:fleet_contract_team_notify.mail_template_contract_new
-msgid "Fleet Contract Team Notify - New Contract"
-msgstr "Notifica Team Contratti Flotta - Nuovo Contratto"
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_expiry
+msgid "Dear ${object.user_id.name or 'User'},"
+msgstr "Gentile ${object.user_id.name or 'Utente'},"
 
 #. module: fleet_contract_team_notify
-#: model:mail.template,subject:fleet_contract_team_notify.mail_template_contract_new
-msgid "New Contract Created: ${object.vehicle_id.name}"
-msgstr "Nuovo Contratto Creato: ${object.vehicle_id.name}"
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_expiry
+msgid "The contract <strong>${object.cost_subtype_id.name or 'Contract'}</strong> for vehicle <strong>${object.vehicle_id.display_name}</strong> is about to expire."
+msgstr "Il contratto <strong>${object.cost_subtype_id.name or 'Contratto'}</strong> per il veicolo <strong>${object.vehicle_id.display_name}</strong> sta per scadere."
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_expiry
+msgid "Details:"
+msgstr "Dettagli:"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_expiry
+msgid "Vehicle:"
+msgstr "Veicolo:"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_expiry
+msgid "Contract Type:"
+msgstr "Tipo contratto:"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_expiry
+msgid "Expiry Date:"
+msgstr "Data scadenza:"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_expiry
+msgid "Start Date:"
+msgstr "Data inizio:"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_expiry
+msgid "Cost:"
+msgstr "Costo:"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_expiry
+msgid "Provider:"
+msgstr "Fornitore:"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_expiry
+msgid "Notes:"
+msgstr "Note:"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_expiry
+msgid "Assigned Team:"
+msgstr "Team assegnato:"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_expiry
+msgid "View Contract"
+msgstr "Visualizza Contratto"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_expiry
+msgid "Best regards,"
+msgstr "Cordiali saluti,"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,subject:fleet_contract_team_notify.mail_template_contract_notification
+msgid "New Contract Assigned: ${object.vehicle_id.display_name}"
+msgstr "Nuovo Contratto Assegnato: ${object.vehicle_id.display_name}"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_notification
+msgid "Hi,"
+msgstr "Ciao,"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_notification
+msgid "A new contract has been created for vehicle <strong>${object.vehicle_id.display_name}</strong> and your team <strong>${object.team_id.name}</strong> has been assigned for notifications."
+msgstr "È stato creato un nuovo contratto per il veicolo <strong>${object.vehicle_id.display_name}</strong> e il tuo team <strong>${object.team_id.name}</strong> è stato assegnato per le notifiche."
