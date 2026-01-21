@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fleet Contract Team Notify</title>
+  <style>
+    body { font-family: Arial, sans-serif; color: #333; margin: 24px; line-height: 1.6; }
+    h1 { color: #444; font-size: 28px; }
+    h2 { color: #555; margin-top: 1.5em; font-size: 20px; }
+    h3 { color: #666; margin-top: 1.2em; font-size: 16px; }
+    ul, ol { margin-top: 0.4em; }
+    li { margin-bottom: 0.3em; }
+    code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+    .section { margin-bottom: 20px; }
+    .feature-list { padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Fleet Contract Team Notify</h1>
+  
+  <div class="section">
+    <p>Extend Odoo's fleet contract notification system with configurable teams and multiple recipients.</p>
+  </div>
+
+  <div class="section">
+    <h2>Key Features</h2>
+    
+    <h3>Core</h3>
+    <ul class="feature-list">
+      <li><strong>Notification Teams:</strong> Create reusable teams with internal users</li>
+      <li><strong>Team Assignment:</strong> Assign a team to each contract for notification management</li>
+      <li><strong>Backward Compatibility:</strong> Original <code>user_id</code> field remains functional</li>
+    </ul>
+
+    <h3>Notifications</h3>
+    <ul class="feature-list">
+      <li><strong>Multiple Email CC:</strong> Team members automatically receive email notifications</li>
+      <li><strong>Automatic Followers:</strong> Team members added as contract followers</li>
+      <li><strong>Activities:</strong> Create expiry activities for all team members</li>
+      <li><strong>Email Templates:</strong> Predefined templates for expiry and new contract notifications</li>
+    </ul>
+
+    <h3>User Interface</h3>
+    <ul class="feature-list">
+      <li><strong>Dedicated Section:</strong> Contract form with "Team Notifications" section</li>
+      <li><strong>Filters and Grouping:</strong> List views with team filters</li>
+      <li><strong>Configuration Menu:</strong> Dedicated menu to manage teams</li>
+      <li><strong>Tag Widgets:</strong> Intuitive visualization with colored tags</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Quick Start</h2>
+    
+    <h3>1. Create a Team</h3>
+    <ol>
+      <li>Navigate to <strong>Fleet → Configuration → Contract Teams</strong></li>
+      <li>Create a new team with a name (e.g., "Maintenance Team")</li>
+      <li>Add team members from internal users</li>
+    </ol>
+
+    <h3>2. Assign Team to Contract</h3>
+    <ol>
+      <li>Open or create a fleet contract</li>
+      <li>In the "Team Notifications" section, select the team</li>
+      <li>The "Users to Notify" field populates automatically</li>
+      <li>Optionally add more users manually</li>
+    </ol>
+
+    <h3>3. Automatic Notifications</h3>
+    <p>Team members will receive:</p>
+    <ul>
+      <li><strong>Emails</strong> as CC when notifications are sent</li>
+      <li><strong>Internal Notifications</strong> as contract followers</li>
+      <li><strong>Activities</strong> for expiry reminders (via scheduler)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Technical Details</h2>
+    
+    <h3>Models</h3>
+    <p><strong>fleet.contract.team:</strong> New model for notification teams</p>
+    <ul>
+      <li>Fields: name, description, user_ids, active, contract_count</li>
+      <li>Methods: action_view_contracts()</li>
+    </ul>
+
+    <p><strong>fleet.vehicle.log.contract (extended):</strong></p>
+    <ul>
+      <li>New fields: team_id, notify_user_ids</li>
+      <li>Automatic follower management</li>
+      <li>Methods for activities and email notifications</li>
+    </ul>
+
+    <h3>Integration</h3>
+    <p>Fully compatible with standard Odoo Fleet module and OCA fleet extensions.</p>
+  </div>
+
+  <div class="section">
+    <h2>Dependencies</h2>
+    <ul>
+      <li><code>fleet</code> - Standard Odoo Fleet module</li>
+      <li><code>mail</code> - Messaging and notification system</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>License</h2>
+    <p>LGPL-3.0 or later</p>
+  </div>
+
+  <div class="section">
+    <h2>Support</h2>
+    <p>For issues or contributions, please use the GitHub repository.</p>
+  </div>
+</body>
+</html>

@@ -185,7 +185,7 @@ LGPL-3.0 or later
 ## Credits
 
 ### Contributors
-- Module Author
+- Community contributors
 
 ### Maintainer
 This module is maintained by the community. For issues or contributions, please use the GitHub repository.

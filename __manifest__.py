@@ -14,8 +14,8 @@
         - Automatic followers
         - Scheduler activities for expiry notifications
     """,
-    'author': 'Walter Tosolini',
-    'website': 'https://github.com/tosolini/fleet_contract_team_notify',
+    'author': 'Community',
+    'website': 'https://github.com/OCA/fleet',
     'license': 'LGPL-3',
     'depends': [
         'fleet',
