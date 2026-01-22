@@ -3,7 +3,7 @@
 
 {
     'name': 'Fleet Contract Team Notify',
-    'version': '18.0.1.0.0',
+    'version': '18.0.1.0.1',
     'category': 'Fleet',
     'summary': 'Team-based notification system for fleet contracts',
     'description': """
@@ -14,8 +14,8 @@
         - Automatic followers
         - Scheduler activities for expiry notifications
     """,
-    'author': 'Community',
-    'website': 'https://github.com/OCA/fleet',
+    'author': 'Walter Tosolini',
+    'website': 'https://github.com/tosolini/fleet_contract_team_notify',
     'license': 'LGPL-3',
     'depends': [
         'fleet',

@@ -51,7 +51,7 @@ class FleetContractTeam(models.Model):
             'name': 'Contracts',
             'type': 'ir.actions.act_window',
             'res_model': 'fleet.vehicle.log.contract',
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'domain': [('team_id', '=', self.id)],
             'context': {'default_team_id': self.id},
         }
