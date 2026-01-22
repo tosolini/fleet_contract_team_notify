@@ -1,6 +1,6 @@
 # Fleet Contract Team Notify
 
-Odoo 18 CE module to extend the fleet contract notification system with configurable teams.
+This module is for Odoo 18 CE to extend the fleet contract notification system with configurable teams.
 
 ## Features
 
