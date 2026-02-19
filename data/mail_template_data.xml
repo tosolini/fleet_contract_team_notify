@@ -1,59 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
         <!-- Email Template for Contract Expiry with Multiple CC -->
         <record id="mail_template_contract_expiry" model="mail.template">
             <field name="name">Fleet Contract Team Notify - Contract Expiry</field>
             <field name="model_id" ref="fleet.model_fleet_vehicle_log_contract"/>
-            <field name="subject">Contract Expiry: ${object.vehicle_id.display_name} - ${object.cost_subtype_id.name or 'Contract'}</field>
-            <field name="email_from">${(object.company_id.email or user.email_formatted) | safe}</field>
-            <field name="email_to">${object.user_id.email or ''}</field>
-            <field name="email_cc">${','.join(object.notify_user_ids.filtered(lambda u: u.email).mapped('email'))}</field>
+            <field name="subject">Contract Expiry: {{ object.vehicle_id.display_name }} - {{ object.cost_subtype_id.name or 'Contract' }}</field>
+            <field name="email_from">{{ object.company_id.email or user.email_formatted }}</field>
+            <field name="email_to">{{ object.user_id.email or '' }}</field>
+            <field name="email_cc">{{ ','.join(object.notify_user_ids.filtered(lambda u: u.email).mapped('email')) }}</field>
             <field name="body_html" type="html">
                 <div style="margin: 0px; padding: 0px;">
                     <p style="margin: 0px; padding: 0px; font-size: 13px;">
-                        Dear ${object.user_id.name or 'User'},
+                        Dear <t t-esc="object.user_id.name or 'User'"/>,
                         <br/><br/>
-                        The contract <strong>${object.cost_subtype_id.name or 'Contract'}</strong> 
-                        for vehicle <strong>${object.vehicle_id.display_name}</strong> 
+                        The contract <strong><t t-esc="object.cost_subtype_id.name or 'Contract'"/></strong>
+                        for vehicle <strong><t t-esc="object.vehicle_id.display_name"/></strong>
                         is about to expire.
                         <br/><br/>
                         <strong>Details:</strong><br/>
-                        • Vehicle: ${object.vehicle_id.display_name}<br/>
-                        • Contract Type: ${object.cost_subtype_id.name}<br/>
-                        • Expiry Date: ${format_date(object.expiration_date)}<br/>
-                        % if object.start_date:
-                        • Start Date: ${format_date(object.start_date)}<br/>
-                        % endif
-                        % if object.cost_generated:
-                        • Cost: ${object.cost_generated} ${object.currency_id.symbol}<br/>
-                        % endif
-                        % if object.insurer_id:
-                        • Provider: ${object.insurer_id.name}<br/>
-                        % endif
+                        • Vehicle: <t t-esc="object.vehicle_id.display_name"/><br/>
+                        • Contract Type: <t t-esc="object.cost_subtype_id.name"/><br/>
+                        • Expiry Date: <t t-esc="format_date(object.expiration_date)"/><br/>
+                        <t t-if="object.start_date">
+                        • Start Date: <t t-esc="format_date(object.start_date)"/><br/>
+                        </t>
+                        <t t-if="object.cost_generated">
+                        • Cost: <t t-esc="object.cost_generated"/> <t t-esc="object.currency_id.symbol"/><br/>
+                        </t>
+                        <t t-if="object.insurer_id">
+                        • Provider: <t t-esc="object.insurer_id.name"/><br/>
+                        </t>
                         <br/>
-                        % if object.notes:
+                        <t t-if="object.notes">
                         <strong>Notes:</strong><br/>
-                        ${object.notes | safe}
+                        <t t-raw="object.notes"/>
                         <br/><br/>
-                        % endif
-                        % if object.team_id:
-                        <em>Assigned Team: ${object.team_id.name}</em><br/>
-                        % endif
+                        </t>
+                        <t t-if="object.team_id">
+                        <em>Assigned Team: <t t-esc="object.team_id.name"/></em><br/>
+                        </t>
                         <br/>
                         <div style="margin: 16px 0px 16px 0px;">
-                            <a href="/web#id=${object.id}&amp;view_type=form&amp;model=fleet.vehicle.log.contract" 
+                            <a t-att-href="'/web#id=%s&amp;view_type=form&amp;model=fleet.vehicle.log.contract' % object.id"
                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px;">
                                 View Contract
                             </a>
                         </div>
                         <br/>
                         Best regards,<br/>
-                        ${object.company_id.name}
+                        <t t-esc="object.company_id.name"/>
                     </p>
                 </div>
             </field>
-            <field name="lang">${object.user_id.lang}</field>
+            <field name="lang">{{ object.user_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <!-- Email Template for Urgent Contract Expiry (7 days) -->
+        <record id="mail_template_contract_expiry_urgent" model="mail.template">
+            <field name="name">Fleet Contract Team Notify - Contract Expiry Urgent</field>
+            <field name="model_id" ref="fleet.model_fleet_vehicle_log_contract"/>
+            <field name="subject">URGENT: Contract Expiry in 7 Days - {{ object.vehicle_id.display_name }}</field>
+            <field name="email_from">{{ object.company_id.email or user.email_formatted }}</field>
+            <field name="email_to">{{ object.user_id.email or '' }}</field>
+            <field name="email_cc">{{ ','.join(object.notify_user_ids.filtered(lambda u: u.email).mapped('email')) }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear <t t-esc="object.user_id.name or 'User'"/>,
+                        <br/><br/>
+                        <strong>URGENT:</strong> the contract <strong><t t-esc="object.cost_subtype_id.name or 'Contract'"/></strong>
+                        for vehicle <strong><t t-esc="object.vehicle_id.display_name"/></strong>
+                        expires within the next 7 days.
+                        <br/><br/>
+                        <strong>Details:</strong><br/>
+                        • Vehicle: <t t-esc="object.vehicle_id.display_name"/><br/>
+                        • Contract Type: <t t-esc="object.cost_subtype_id.name"/><br/>
+                        • Expiry Date: <t t-esc="format_date(object.expiration_date)"/><br/>
+                        <t t-if="object.start_date">
+                        • Start Date: <t t-esc="format_date(object.start_date)"/><br/>
+                        </t>
+                        <t t-if="object.cost_generated">
+                        • Cost: <t t-esc="object.cost_generated"/> <t t-esc="object.currency_id.symbol"/><br/>
+                        </t>
+                        <t t-if="object.insurer_id">
+                        • Provider: <t t-esc="object.insurer_id.name"/><br/>
+                        </t>
+                        <br/>
+                        <t t-if="object.notes">
+                        <strong>Notes:</strong><br/>
+                        <t t-raw="object.notes"/>
+                        <br/><br/>
+                        </t>
+                        <t t-if="object.team_id">
+                        <em>Assigned Team: <t t-esc="object.team_id.name"/></em><br/>
+                        </t>
+                        <br/>
+                        <div style="margin: 16px 0px 16px 0px;">
+                            <a t-att-href="'/web#id=%s&amp;view_type=form&amp;model=fleet.vehicle.log.contract' % object.id"
+                               style="background-color: #C0392B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px;">
+                                View Contract
+                            </a>
+                        </div>
+                        <br/>
+                        Best regards,<br/>
+                        <t t-esc="object.company_id.name"/>
+                    </p>
+                </div>
+            </field>
+            <field name="lang">{{ object.user_id.lang }}</field>
             <field name="auto_delete" eval="True"/>
         </record>
 
@@ -61,38 +117,38 @@
         <record id="mail_template_contract_notification" model="mail.template">
             <field name="name">Fleet Contract Team Notify - New Contract</field>
             <field name="model_id" ref="fleet.model_fleet_vehicle_log_contract"/>
-            <field name="subject">New Contract Assigned: ${object.vehicle_id.display_name}</field>
-            <field name="email_from">${(object.company_id.email or user.email_formatted) | safe}</field>
-            <field name="email_to">${','.join(object.notify_user_ids.filtered(lambda u: u.email).mapped('email'))}</field>
+            <field name="subject">New Contract Assigned: {{ object.vehicle_id.display_name }}</field>
+            <field name="email_from">{{ object.company_id.email or user.email_formatted }}</field>
+            <field name="email_to">{{ ','.join(object.notify_user_ids.filtered(lambda u: u.email).mapped('email')) }}</field>
             <field name="body_html" type="html">
                 <div style="margin: 0px; padding: 0px;">
                     <p style="margin: 0px; padding: 0px; font-size: 13px;">
                         Hi,
                         <br/><br/>
-                        A new contract has been created for vehicle <strong>${object.vehicle_id.display_name}</strong>
-                        and your team <strong>${object.team_id.name}</strong> has been assigned for notifications.
+                        A new contract has been created for vehicle <strong><t t-esc="object.vehicle_id.display_name"/></strong>
+                        and your team <strong><t t-esc="object.team_id.name"/></strong> has been assigned for notifications.
                         <br/><br/>
                         <strong>Details:</strong><br/>
-                        • Vehicle: ${object.vehicle_id.display_name}<br/>
-                        • Contract Type: ${object.cost_subtype_id.name}<br/>
-                        % if object.start_date:
-                        • Start Date: ${format_date(object.start_date)}<br/>
-                        % endif
-                        % if object.expiration_date:
-                        • Expiry Date: ${format_date(object.expiration_date)}<br/>
-                        % endif
-                        % if object.cost_generated:
-                        • Cost: ${object.cost_generated} ${object.currency_id.symbol}<br/>
-                        % endif
+                        • Vehicle: <t t-esc="object.vehicle_id.display_name"/><br/>
+                        • Contract Type: <t t-esc="object.cost_subtype_id.name"/><br/>
+                        <t t-if="object.start_date">
+                        • Start Date: <t t-esc="format_date(object.start_date)"/><br/>
+                        </t>
+                        <t t-if="object.expiration_date">
+                        • Expiry Date: <t t-esc="format_date(object.expiration_date)"/><br/>
+                        </t>
+                        <t t-if="object.cost_generated">
+                        • Cost: <t t-esc="object.cost_generated"/> <t t-esc="object.currency_id.symbol"/><br/>
+                        </t>
                         <br/>
                         <div style="margin: 16px 0px 16px 0px;">
-                            <a href="/web#id=${object.id}&amp;view_type=form&amp;model=fleet.vehicle.log.contract" 
+                            <a t-att-href="'/web#id=%s&amp;view_type=form&amp;model=fleet.vehicle.log.contract' % object.id"
                                style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px;">
                                 View Contract
                             </a>
                         </div>
                         <br/>
-                        ${object.company_id.name}
+                        <t t-esc="object.company_id.name"/>
                     </p>
                 </div>
             </field>

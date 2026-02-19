@@ -26,6 +26,7 @@
         'views/fleet_contract_team_views.xml',
         'views/fleet_vehicle_log_contract_views.xml',
         'data/mail_template_data.xml',
+        'data/cron_data.xml',
     ],
     'installable': True,
     'auto_install': False,

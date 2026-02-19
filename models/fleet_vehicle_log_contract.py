@@ -1,6 +1,8 @@
 # Copyright 2026
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
+from datetime import timedelta
+
 from odoo import api, fields, models
 
 
@@ -48,6 +50,7 @@ class FleetVehicleLogContract(models.Model):
         contracts = super().create(vals_list)
         for contract in contracts:
             contract._subscribe_team_members()
+            contract._send_new_contract_notification()
         return contracts
 
     def write(self, vals):
@@ -55,6 +58,7 @@ class FleetVehicleLogContract(models.Model):
         res = super().write(vals)
         if 'team_id' in vals or 'notify_user_ids' in vals:
             self._subscribe_team_members()
+            self._send_new_contract_notification()
         return res
 
     def _subscribe_team_members(self):
@@ -120,15 +124,45 @@ class FleetVehicleLogContract(models.Model):
                         'user_id': user.id,
                     })
 
-    def _send_expiry_notification_email(self):
+    def _send_expiry_notification_email(self, template_xmlid='fleet_contract_team_notify.mail_template_contract_expiry'):
         """
         Send notification email with multiple CCs to team members.
         Uses the configured template with automatic CCs.
         """
-        template = self.env.ref('fleet_contract_team_notify.mail_template_contract_expiry', raise_if_not_found=False)
+        template = self.env.ref(template_xmlid, raise_if_not_found=False)
         if not template:
             return
         
         for contract in self:
             # Send email to all team members
             template.send_mail(contract.id, force_send=False)
+
+    def _send_new_contract_notification(self):
+        """Send email when a new contract is created or a team is assigned."""
+        template = self.env.ref('fleet_contract_team_notify.mail_template_contract_notification', raise_if_not_found=False)
+        if not template:
+            return
+
+        for contract in self:
+            if not contract.notify_user_ids:
+                continue
+            template.send_mail(contract.id, force_send=False)
+
+    @api.model
+    def _cron_notify_expiring_contracts(self, days=30, template_xmlid='fleet_contract_team_notify.mail_template_contract_expiry'):
+        """Daily cron job to create activities and send expiry notifications."""
+        today = fields.Date.today()
+        deadline = today + timedelta(days=days)
+
+        contracts = self.search([
+            ('expiration_date', '>=', today),
+            ('expiration_date', '<=', deadline),
+            ('state', '!=', 'closed'),
+            '|',
+            ('team_id', '!=', False),
+            ('user_id', '!=', False),
+        ])
+
+        for contract in contracts:
+            contract._create_expiry_activities()
+            contract._send_expiry_notification_email(template_xmlid=template_xmlid)
