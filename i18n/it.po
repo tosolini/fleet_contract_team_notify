@@ -241,3 +241,26 @@ msgstr ""
 "Invia email di notifica con CC multipli ai membri del team.\n"
 "Usa il template configurato con CC automatici."
 
+#. module: fleet_contract_team_notify
+#: model:mail.template,subject:fleet_contract_team_notify.mail_template_contract_expiring
+msgid "Contract expiring for vehicle ${object.vehicle_id.display_name}"
+msgstr "Contratto in scadenza per il veicolo ${object.vehicle_id.display_name}"
+
+#. module: fleet_contract_team_notify
+#: model:mail.template,body_html:fleet_contract_team_notify.mail_template_contract_expiring
+msgid ""
+"<p>Hello Team,</p>\n"
+"<p>The contract <strong>${object.name}</strong> for vehicle "
+"<strong>${object.vehicle_id.display_name}</strong> is expiring on "
+"<strong>${object.expiration_date}</strong>.</p>\n"
+"<p>Please take the necessary actions.</p>\n"
+"<p>Regards,<br/>\n"
+"Odoo Notification System</p>"
+msgstr ""
+"<p>Ciao Team,</p>\n"
+"<p>Il contratto <strong>${object.name}</strong> per il veicolo "
+"<strong>${object.vehicle_id.display_name}</strong> è in scadenza il "
+"<strong>${object.expiration_date}</strong>.</p>\n"
+"<p>Si prega di intraprendere le azioni necessarie.</p>\n"
+"<p>Saluti,<br/>\n"
+"Sistema di Notifiche Odoo</p>"
