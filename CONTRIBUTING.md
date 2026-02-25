@@ -13,9 +13,8 @@ We welcome contributions to improve the fleet_contract_team_notify project! Whet
 
 ## Development Setup
 
-- Ensure you have Docker and Docker Compose installed (given your setup with Ubuntu Server and Portainer).
+- Ensure you have Odoo ERP installed on your system, or installed on Docker Container.
 - Review the README for any specific build/run instructions.
-- Test changes locally using `docker-compose up` or equivalent commands.
 
 ## Pull Request Guidelines
 
@@ -26,7 +25,7 @@ We welcome contributions to improve the fleet_contract_team_notify project! Whet
 
 ## Code Standards
 
-- Follow existing code style (Python, Docker configs, etc.).
+- Follow existing code style (Python, Odoo, etc.).
 - Write clear commit messages in imperative mood (e.g., "Add user authentication").
 - Add or update tests for new features or bug fixes.
 - Update documentation if your changes affect usage.
