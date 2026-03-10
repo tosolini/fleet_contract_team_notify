@@ -14,10 +14,12 @@ class FleetContractTeam(models.Model):
         string='Team Name',
         required=True,
         translate=True,
+        tracking=True,
     )
     description = fields.Text(
         string='Description',
         translate=True,
+        tracking=True,
     )
     user_ids = fields.Many2many(
         comodel_name='res.users',
@@ -26,6 +28,7 @@ class FleetContractTeam(models.Model):
         column2='user_id',
         string='Users to Notify',
         help='Internal users who will receive notifications for contracts assigned to this team',
+        tracking=True,
     )
     active = fields.Boolean(
         string='Active',
