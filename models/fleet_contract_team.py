@@ -6,7 +6,7 @@ from odoo import api, fields, models
 
 class FleetContractTeam(models.Model):
     _name = 'fleet.contract.team'
-    _description = 'Fleet Contract Notification Team'
+    _description = 'Fleet Contract Notification for Team'
     _order = 'name'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
