@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/addons/fleet_contract_team_notify/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "dependabot"
+    allow:
+      - dependency-type: "all"
+    ignore:
+      - dependency-name: "odoo"
