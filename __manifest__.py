@@ -3,7 +3,7 @@
 
 {
     'name': 'Fleet Contract Team Notify',
-    'version': '18.0.1.0.1',
+    'version': '19.0.1.0.1',
     'category': 'Fleet',
     'summary': 'Team-based notification system for fleet contracts',
     'description': """

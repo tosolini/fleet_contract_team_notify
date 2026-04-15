@@ -1,6 +1,7 @@
 # Fleet Contract Team Notify
 
-This module is for Odoo 18 CE to extend the fleet contract notification system with configurable teams.
+This module is for Odoo 19 CE (Community Edition) to extend the fleet contract notification system with configurable teams.
+For Odoo 18 CE, use the `18.0` branch. This branch (`19.0`) is dedicated to Odoo 19.0 compatibility.
 
 ## Features
 
@@ -158,9 +159,11 @@ def _cron_contract_expiry_notify(self):
 odoo-bin -d test_db -i fleet_contract_team_notify --test-enable --stop-after-init
 ```
 
+
 ## Compatibility
 
-- **Odoo 18 CE**: Tested and working
+- **Odoo 19 CE**: Tested and working
+- **Odoo 18 CE**: Use the `18.0` branch for Odoo 18 compatibility
 - **OCA Fleet Modules**: Compatible, doesn't override existing fields
 - **Existing Data**: Preserved, the original `user_id` field remains functional
 
