@@ -2,20 +2,16 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+Questa repository utilizza [Dependabot](https://docs.github.com/it/code-security/dependabot) per notificare automaticamente tramite Pull Request eventuali aggiornamenti di sicurezza delle dipendenze Python (pip). Riceverai una notifica ogni volta che viene aperta una PR di sicurezza.
+
+## Versioni supportate
+
+| Versione | Supportata         |
+| -------- | ------------------ |
+| 18.0.x   | :white_check_mark: |
+| < 18.0   | :x:                |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
-
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+Per segnalare una vulnerabilità, apri una issue su GitHub o contatta direttamente l'autore tramite [GitHub Issues](https://github.com/tosolini/fleet_contract_team_notify/issues). Riceverai un aggiornamento entro 7 giorni lavorativi.
